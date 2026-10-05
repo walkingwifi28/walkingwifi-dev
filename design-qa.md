@@ -1,15 +1,11 @@
-# Design QA
+# Design QA — 2026-10-05
 
-- Source: `/var/folders/wc/kdbyg03x5r132xkd6c9dmjsh0000gn/T/codex-clipboard-8daaad1a-ca8d-457c-b1d2-8af85e095852.png` (934 × 1379)
-- Implementation: `/tmp/walkingwifi-desktop.png` (934 × 1393 full-page capture)
-- Browser: Codex in-app browser, desktop viewport 934 × 1379 CSS pixels, mobile 390 × 844 CSS pixels. Capture density: 1.
-- State: initial page, white background.
-- Full-page comparison: source and rendered captures opened together. Content, left margin, hierarchy and page order match. Company heading weight and undersized Oracle wordmark were corrected after initial capture; a second browser capture confirmed the corrections.
-- Focused regions: technology logos inspected in the full-resolution capture; no separate crop required.
-- Mobile: no horizontal overflow (document scrollWidth and viewport both 390); images loaded successfully.
-- Link verification: all four anchors have HTTPS destinations and safe new-tab attributes. All four URLs updated and checked against the URLs supplied by the user.
-- Browser console errors: none. Broken images: none.
-- Static validation: local image references and alt text checked; git diff --check passed.
-- Follow-up polish (P3): supplied logo variants differ slightly from the reference; platform font rendering and section positions vary by a few pixels.
-
-final result: passed
+- Approved style: warm paper background, ink typography, teal accent, timeline and restrained cards.
+- Desktop: 1280px viewport; scrollWidth 1280px. Full-page screenshot visually reviewed.
+- Mobile: 390px and 320px viewports; scrollWidth matched both. Single-column cards confirmed. 390px full-page screenshot visually reviewed.
+- Broken images: zero at all checked widths.
+- Keyboard focus: visible 3px outline on project link.
+- All four original destinations retained with noopener noreferrer.
+- Initial console error: missing favicon (404); inline SVG favicon added.
+- Static checks: git diff --check passed.
+- Preview: http://127.0.0.1:4173/

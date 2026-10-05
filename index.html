@@ -4,95 +4,150 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="石田 惇（あるくWiFi）のポートフォリオ。株式会社VARISTA 技術最高責任者。経歴、開発経験、個人プロジェクトをご紹介します。">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2716%27 fill=%27%23226457%27/%3E%3Ctext x=%2732%27 y=%2745%27 text-anchor=%27middle%27 font-family=%27Arial%27 font-size=%2744%27 fill=%27%23f7f5f0%27%3Ew%3C/text%3E%3C/svg%3E">
   <title>walkingwifi | 石田 惇のポートフォリオ</title>
   <style>
+    :root { --paper: #f7f5f0; --ink: #242c2b; --muted: #68726e; --accent: #226457; --line: #dedfd5; }
     * { box-sizing: border-box; }
     html { color-scheme: light; }
-    body { margin: 0; color: #090909; background: #f6f6f4; font-family: Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 24px; line-height: 1.5; font-weight: 400; }
-    main { max-width: 934px; margin-inline: auto; padding: 32px 40px 20px; }
-    h1 { font-size: 22px; line-height: 33px; margin: 0 0 28px; font-weight: 700; }
-    h2, dt { font-size: 16px; line-height: 24px; font-weight: 400; margin: 0 0 2px; }
-    dl { margin: 0; }
-    dd { margin: 0 0 22px; }
-    section { margin-top: 20px; }
-    .history { margin-top: 8px; }
-    .history-row { display: grid; grid-template-columns: 132px 1fr; margin-bottom: 10px; }
-    .year { white-space: nowrap; }
+    body { margin: 0; color: var(--ink); background: var(--paper); font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif; font-size: 16px; line-height: 1.85; -webkit-font-smoothing: antialiased; }
+    main { max-width: 1080px; margin-inline: auto; padding: 38px 56px 0; }
     p { margin: 0; }
-    .history-detail { margin-top: 8px; }
-    .experience { margin-top: 20px; }
-    .company { font-size: 20px; line-height: 30px; font-weight: 400; margin: 8px 0 6px; }
-    .work { margin: 0 0 20px 16px; }
-    .stack { display: flex; align-items: center; gap: 12px; height: 30px; margin-top: 4px; }
-    .stack img { display: block; width: 28px; height: 28px; object-fit: contain; }
-    .stack img.oracle { width: 90px; height: 90px; }
-    .stack img.csharp { width: 24px; }
-    .stack img.aws { width: 30px; }
-    .other { margin: -2px 0 24px 16px; }
-    .projects { margin-top: 22px; }
-    .link-list { list-style: none; padding: 0; margin: 10px 0 0; }
-    .link-list li { margin-bottom: 8px; }
-    a { color: inherit; text-decoration: none; text-underline-offset: 5px; }
-    a:hover { text-decoration: underline; }
-    a:focus-visible { outline: 2px solid #1565c0; outline-offset: 5px; border-radius: 2px; }
-    .external { width: 22px; height: 22px; margin-left: 5px; vertical-align: -2px; }
-    .links { margin-top: 20px; }
-    @media (max-width: 600px) {
-      main { padding: 28px 24px; }
-      body { font-size: 20px; }
-      .history-row { grid-template-columns: 1fr; gap: 4px; margin-bottom: 18px; }
-      .history-detail { margin-top: 6px; }
-      .work, .other { margin-left: 8px; }
-      .company { font-size: 18px; }
-      .external { width: 19px; height: 19px; }
+    a { color: inherit; text-decoration: none; }
+    a:focus-visible { outline: 3px solid var(--accent); outline-offset: 5px; border-radius: 4px; }
+    .masthead { display: flex; justify-content: space-between; align-items: center; padding-bottom: 20px; border-bottom: 1px solid var(--line); }
+    .brand { font-size: 14px; font-weight: 700; letter-spacing: -.04em; }
+    .masthead-note, .eyebrow, .section-label { color: var(--accent); font-family: Arial, sans-serif; font-size: 11px; letter-spacing: .18em; font-weight: 700; }
+    .hero { display: grid; grid-template-columns: 1.25fr 1fr; align-items: end; gap: 48px; padding: 72px 0 64px; }
+    h1 { font-family: Arial, sans-serif; font-size: clamp(48px, 7vw, 82px); font-weight: 500; letter-spacing: -.075em; line-height: 1.05; margin: 20px 0 18px; }
+    .hero-caption { font-size: 14px; color: var(--muted); }
+    .hero-caption span { color: var(--accent); margin-inline: 10px; }
+    dl { margin: 0; padding: 2px 0 2px 26px; border-left: 2px solid var(--accent); }
+    dt { margin: 0 0 2px; font-size: 11px; color: var(--muted); letter-spacing: .08em; }
+    dd { margin: 0 0 14px; font-size: 15px; }
+    dd:last-child { margin-bottom: 0; }
+    .section { border-top: 1px solid var(--line); padding: 36px 0 42px; display: grid; grid-template-columns: 190px minmax(0, 1fr); gap: 38px; }
+    h2 { font-size: 19px; font-weight: 600; letter-spacing: .03em; margin: 6px 0 0; line-height: 1.6; }
+    .history { padding-top: 5px; }
+    .history-row { position: relative; display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 22px; padding: 0 0 32px 20px; border-left: 1px solid var(--line); }
+    .history-row::before { content: ""; position: absolute; top: 9px; left: -4px; width: 7px; height: 7px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 0 5px var(--paper); }
+    .history-row:last-child { padding-bottom: 0; }
+    .year { font-family: Arial, sans-serif; font-size: 17px; color: var(--accent); font-weight: 600; }
+    .history-detail { color: var(--muted); font-size: 14px; margin-top: 10px; }
+    .company { margin: 0 0 14px; font-size: 14px; font-weight: 600; }
+    .company:not(:first-child) { margin-top: 28px; }
+    .work-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .work { background: #fffdf8; border: 1px solid var(--line); padding: 20px; border-radius: 10px; display: flex; flex-direction: column; justify-content: space-between; gap: 16px; }
+    .work p { font-size: 14px; line-height: 1.7; }
+    .research-link:hover { text-decoration: underline; text-underline-offset: 4px; }
+    .research-link .external { margin-left: 6px; vertical-align: -3px; }
+    .stack { display: flex; align-items: center; gap: 12px; height: 25px; }
+    .stack img { display: block; width: 24px; height: 24px; object-fit: contain; }
+    .stack img.oracle { width: 64px; height: 64px; }
+    .stack img.aws { width: 28px; }
+    .other { color: var(--muted); font-size: 12px; margin-top: 12px; }
+    .link-list { list-style: none; padding: 0; margin: 0; }
+    .project-list { display: grid; gap: 12px; }
+    .project-list a { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 20px 22px; background: #eeeee5; border: 1px solid transparent; border-radius: 10px; transition: background .18s, border-color .18s; }
+    .project-list a:hover { background: #e6ece2; border-color: #b6cabb; }
+    .project-name { display: block; font-family: Arial, sans-serif; font-size: 19px; font-weight: 600; letter-spacing: -.03em; }
+    .project-description { display: block; color: var(--muted); font-size: 13px; margin-top: 4px; }
+    .external { width: 18px; height: 18px; flex-shrink: 0; opacity: .65; }
+    .social-list { display: flex; flex-wrap: wrap; gap: 12px; }
+    .social-list a { display: inline-flex; align-items: center; gap: 20px; font-size: 14px; padding: 10px 18px; border: 1px solid var(--line); border-radius: 100px; transition: background .18s; }
+    .social-list a:hover { background: #e9eee5; }
+    footer { padding: 24px 0 30px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 16px; font-size: 11px; color: var(--muted); letter-spacing: .04em; }
+    @media (max-width: 720px) {
+      main { padding-inline: 28px; }
+      .hero { grid-template-columns: 1fr; gap: 32px; padding: 48px 0; }
+      h1 { font-size: 64px; }
+      .section { grid-template-columns: 1fr; gap: 24px; padding-block: 30px; }
+      dl { padding-left: 20px; }
     }
+    @media (max-width: 480px) {
+      main { padding: 24px 20px 0; }
+      h1 { font-size: clamp(43px, 13vw, 62px); }
+      .masthead-note { font-size: 9px; letter-spacing: .12em; }
+      .work-grid { grid-template-columns: 1fr; }
+      .history-row { grid-template-columns: 1fr; gap: 4px; }
+      .project-list a { padding: 18px; gap: 12px; }
+      .project-name { font-size: 17px; overflow-wrap: anywhere; }
+      .social-list { gap: 8px; }
+      .social-list a { gap: 12px; padding-inline: 14px; }
+      footer { font-size: 10px; }
+    }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
   </style>
 </head>
 <body>
   <main>
-    <h1>walkingwifi</h1>
+    <header class="masthead"><span class="brand">walkingwifi</span><span class="masthead-note">PERSONAL PORTFOLIO</span></header>
+    <div class="hero">
+      <div><p class="eyebrow">ENGINEER / CTO</p><h1>walkingwifi</h1><p class="hero-caption">石田 惇<span>/</span>あるくWiFi</p></div>
     <dl aria-label="プロフィール">
       <dt>氏名</dt><dd>石田 惇</dd>
       <dt>コードネーム</dt><dd>あるくWiFi</dd>
       <dt>所属</dt><dd>株式会社VARISTA 技術最高責任者</dd>
     </dl>
-    <section aria-labelledby="career-heading">
-      <h2 id="career-heading">主要勤務歴</h2>
+    </div>
+    <section class="section " aria-labelledby="career-heading">
+      <div class="section-heading"><p class="section-label">01 — CAREER</p><h2 id="career-heading">主要勤務歴</h2></div>
+      <div class="section-content">
       <div class="history">
         <div class="history-row">
-          <p class="year">【2022年】</p>
-          <div><p>名古屋工業大学大学院工学研究科 博士前期課程 修了</p><p class="history-detail">三菱電機ソフトウエア株式会社に入社<br>システム開発業務に従事</p></div>
+          <p class="year">2022</p>
+          <p>名古屋工業大学大学院工学研究科 博士前期課程 修了</p>
         </div>
         <div class="history-row">
-          <p class="year">【2026年】</p>
+          <p class="year">2022</p>
+          <p>三菱電機ソフトウエア株式会社に入社<br>システム開発業務に従事</p>
+        </div>
+        <div class="history-row">
+          <p class="year">2026</p>
           <p>株式会社VARISTAに入社<br>技術最高責任者として業務を遂行</p>
         </div>
       </div>
+      </div>
     </section>
-    <section class="experience" aria-labelledby="experience-heading">
-      <h2 id="experience-heading">開発経歴</h2>
-      <h3 class="company">【三菱電機ソフトウエア株式会社】</h3>
+    <section class="section experience" aria-labelledby="experience-heading">
+      <div class="section-heading"><p class="section-label">02 — EXPERIENCE</p><h2 id="experience-heading">開発経歴</h2></div>
+      <div class="section-content">
+      <h3 class="company">名古屋工業大学</h3>
+      <div class="work-grid">
+        <div class="work"><p><a class="research-link" href="https://proceedings-of-deim.github.io/DEIM2022/papers/K31-5.pdf" target="_blank" rel="noopener noreferrer">手描き入力に適応したHMMに基づくマップマッチング手法<img class="external" src="assets/external-link.svg" alt="（新しいタブで開く）"></a></p><div class="stack"><img src="assets/java.svg" alt="Java"><img src="assets/postgresql.svg" alt="PostgreSQL"></div></div>
+      </div>
+      <h3 class="company">三菱電機ソフトウエア株式会社</h3>
+      <div class="work-grid">
       <div class="work"><p>試験成績書検認システム</p><div class="stack"><img class="csharp" src="assets/csharp.svg" alt="C#"><img class="oracle" src="assets/oracle.svg" alt="Oracle"></div></div>
       <div class="work"><p>製品の工程管理システム</p><div class="stack"><img class="csharp" src="assets/csharp.svg" alt="C#"><img class="oracle" src="assets/oracle.svg" alt="Oracle"></div></div>
       <div class="work"><p>固有言語のLLMチャットアプリケーション</p><div class="stack"><img src="assets/azure.svg" alt="Microsoft Azure"><img src="assets/react.svg" alt="React"><img src="assets/python.svg" alt="Python"></div></div>
+      </div>
       <p class="other">その他、複数の業務システムを開発</p>
-      <h3 class="company">【株式会社VARISTA】</h3>
-      <div class="work"><p>インタラクティブ動画サービス</p><div class="stack"><img class="aws" src="assets/aws.svg" alt="AWS"><img src="assets/react.svg" alt="React"><img src="assets/python.svg" alt="Python"><img src="assets/postgresql.svg" alt="PostgreSQL"></div></div>
+      <h3 class="company">株式会社VARISTA</h3>
+      <div class="work-grid">
+      <div class="work"><p><a class="research-link" href="https://vuddy.jp/" target="_blank" rel="noopener noreferrer">インタラクティブ動画サービスVuddy<img class="external" src="assets/external-link.svg" alt="（新しいタブで開く）"></a></p><div class="stack"><img class="aws" src="assets/aws.svg" alt="AWS"><img src="assets/react.svg" alt="React"><img src="assets/python.svg" alt="Python"><img src="assets/postgresql.svg" alt="PostgreSQL"></div></div>
+      </div>
+      </div>
     </section>
-    <section class="projects" aria-labelledby="projects-heading">
-      <h2 id="projects-heading">プロジェクト</h2>
-      <ul class="link-list">
-        <li><a href="https://github.com/walkingwifi28/codex-rate-limit-tray-win" target="_blank" rel="noopener noreferrer">Codexのレートリミット制限をタスクトレイに表示<img class="external" src="assets/external-link.svg" alt="（新しいタブで開く）"></a></li>
-        <li><a href="https://github.com/walkingwifi28/findtree" target="_blank" rel="noopener noreferrer">Macのディスク占有率を可視化<img class="external" src="assets/external-link.svg" alt="（新しいタブで開く）"></a></li>
+    <section class="section projects" aria-labelledby="projects-heading">
+      <div class="section-heading"><p class="section-label">03 — PROJECTS</p><h2 id="projects-heading">プロジェクト</h2></div>
+      <div class="section-content">
+      <ul class="link-list project-list">
+        <li><a href="https://github.com/walkingwifi28/codex-rate-limit-tray-win" target="_blank" rel="noopener noreferrer"><span><span class="project-name">Codex Rate Limit Tray</span><span class="project-description">Codexのレートリミット制限をタスクトレイに表示</span></span><img class="external" src="assets/external-link.svg" alt="（新しいタブで開く）"></a></li>
+        <li><a href="https://github.com/walkingwifi28/findtree" target="_blank" rel="noopener noreferrer"><span><span class="project-name">FindTree</span><span class="project-description">Macのディスク占有率を可視化</span></span><img class="external" src="assets/external-link.svg" alt="（新しいタブで開く）"></a></li>
       </ul>
+      </div>
     </section>
-    <section class="links" aria-labelledby="links-heading">
-      <h2 id="links-heading">リンク</h2>
-      <ul class="link-list">
+    <section class="section links" aria-labelledby="links-heading">
+      <div class="section-heading"><p class="section-label">04 — ELSEWHERE</p><h2 id="links-heading">リンク</h2></div>
+      <div class="section-content">
+      <ul class="link-list social-list">
         <li><a href="https://github.com/walkingwifi28" target="_blank" rel="noopener noreferrer">GitHub<img class="external" src="assets/external-link.svg" alt="（新しいタブで開く）"></a></li>
         <li><a href="https://m-varista.com/" target="_blank" rel="noopener noreferrer">株式会社VARISTA<img class="external" src="assets/external-link.svg" alt="（新しいタブで開く）"></a></li>
       </ul>
+      </div>
     </section>
+    <footer><span>© walkingwifi</span><span>ENGINEER / CTO</span></footer>
   </main>
 </body>
 </html>
