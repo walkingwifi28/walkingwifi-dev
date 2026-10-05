@@ -57,6 +57,24 @@
     .social-list a { display: inline-flex; align-items: center; gap: 20px; font-size: 14px; padding: 10px 18px; border: 1px solid var(--line); border-radius: 100px; transition: background .18s; }
     .social-list a:hover { background: #e9eee5; }
     footer { padding: 24px 0 30px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 16px; font-size: 11px; color: var(--muted); letter-spacing: .04em; }
+    .vuddy-player { position: fixed; right: max(20px, env(safe-area-inset-right)); bottom: max(20px, env(safe-area-inset-bottom)); z-index: 100; width: min(300px, calc(100vw - 40px), calc((100dvh - 40px) * 9 / 16)); aspect-ratio: 9 / 16; }
+    .vuddy-player[hidden] { display: none; }
+    .vuddy-player iframe { display: block; width: 100%; height: 100%; border: 0; background: transparent; }
+    .vuddy-player:not(.is-expanded) iframe { pointer-events: none; }
+    .vuddy-expand { position: absolute; inset: 0; width: 100%; height: 100%; padding: 0; border: 0; background: transparent; cursor: zoom-in; }
+    .vuddy-expand:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+    .vuddy-player.is-expanded { inset: 0; width: 100%; height: 100dvh; aspect-ratio: auto; z-index: 1000; background: #202124; }
+    .vuddy-player.is-expanded .vuddy-expand { display: none; }
+    .vuddy-player.is-expanded .vuddy-close { top: max(12px, env(safe-area-inset-top)); right: max(12px, env(safe-area-inset-right)); }
+    .vuddy-close { position: absolute; top: 12px; right: 12px; display: grid; place-items: center; width: 42px; height: 42px; padding: 0; border: 0; border-radius: 50%; background: rgb(36 44 43 / 65%); color: white; cursor: pointer; }
+    .vuddy-close:hover { background: var(--ink); }
+    .vuddy-close:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+    .vuddy-show { position: fixed; right: max(20px, env(safe-area-inset-right)); bottom: max(20px, env(safe-area-inset-bottom)); z-index: 100; display: grid; place-items: center; width: 42px; height: 42px; padding: 0; border: 0; border-radius: 50%; background: #202124; color: #e3e3e3; box-shadow: 0 8px 22px rgb(0 0 0 / 24%); cursor: pointer; }
+    .vuddy-show[hidden] { display: none; }
+    .vuddy-show:hover { background: #303134; }
+    .vuddy-show:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+    @media (max-width: 720px) { .vuddy-show { right: max(12px, env(safe-area-inset-right)); bottom: max(12px, env(safe-area-inset-bottom)); } }
+    @media (max-width: 720px) { .vuddy-player { right: max(12px, env(safe-area-inset-right)); bottom: max(12px, env(safe-area-inset-bottom)); width: min(140px, calc(100vw - 24px), calc((100dvh - 24px) * 9 / 16)); } }
     @media (max-width: 720px) {
       main { padding-inline: 28px; }
       .hero { grid-template-columns: 1fr; gap: 32px; padding: 48px 0; }
@@ -149,5 +167,66 @@
     </section>
     <footer><span>© walkingwifi</span><span>ENGINEER / CTO</span></footer>
   </main>
+  <aside class="vuddy-player" id="vuddy-player" aria-label="Vuddyプレイヤー">
+    <iframe src="https://app.vuddy.jp/walkingwifi" title="walkingwifiのVuddyインタラクティブ動画" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen tabindex="-1"></iframe>
+    <button class="vuddy-expand" type="button" aria-label="Vuddyを全画面表示" aria-controls="vuddy-player" aria-expanded="false"></button>
+    <button class="vuddy-close" type="button" aria-label="Vuddyを閉じる">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+    </button>
+  </aside>
+  <button class="vuddy-show" type="button" aria-label="Vuddyを表示" aria-controls="vuddy-player" aria-expanded="false" hidden>
+    <svg width="24" height="24" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true"><path d="M480-480q-51 0-85.5-34.5T360-600q0-50 34.5-85t85.5-35q50 0 85 35t35 85q0 51-35 85.5T480-480Zm0-80q17 0 28.5-11.5T520-600q0-17-11.5-28.5T480-640q-17 0-28.5 11.5T440-600q0 17 11.5 28.5T480-560ZM240-240v-76q0-21 10.5-39.5T279-385q46-27 96.5-41T480-440q54 0 104.5 14t96.5 41q18 11 28.5 29.5T720-316v76H240Zm160-110q-39 10-74 30h308q-35-20-74-30t-80-10q-41 0-80 10ZM160-80q-33 0-56.5-23.5T80-160v-160h80v160h160v80H160ZM80-640v-160q0-33 23.5-56.5T160-880h160v80H160v160H80ZM640-80v-80h160v-160h80v160q0 33-23.5 56.5T800-80H640Zm160-560v-160H640v-80h160q33 0 56.5 23.5T880-800v160h-80Z"/></svg>
+  </button>
+  <script>
+    const player = document.getElementById('vuddy-player');
+    const closeButton = player.querySelector('.vuddy-close');
+    const showButton = document.querySelector('.vuddy-show');
+    const frame = player.querySelector('iframe');
+    const videoUrl = frame.src;
+    const expandButton = player.querySelector('.vuddy-expand');
+    const main = document.querySelector('main');
+    let previousOverflow;
+    function setExpanded(expanded) {
+      player.classList.toggle('is-expanded', expanded);
+      expandButton.setAttribute('aria-expanded', String(expanded));
+      closeButton.setAttribute('aria-label', expanded ? 'Vuddyを小さい表示に戻す' : 'Vuddyを閉じる');
+      frame.tabIndex = expanded ? 0 : -1;
+      main.inert = expanded;
+      if (expanded) {
+        previousOverflow = document.body.style.overflow;
+        document.body.style.overflow = 'hidden';
+        player.setAttribute('role', 'dialog');
+        player.setAttribute('aria-modal', 'true');
+        closeButton.focus();
+      } else {
+        document.body.style.overflow = previousOverflow;
+        player.removeAttribute('role');
+        player.removeAttribute('aria-modal');
+        expandButton.focus();
+      }
+    }
+    expandButton.addEventListener('click', () => setExpanded(true));
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && player.classList.contains('is-expanded')) setExpanded(false);
+    });
+    closeButton.addEventListener('click', () => {
+      if (player.classList.contains('is-expanded')) {
+        setExpanded(false);
+        return;
+      }
+      player.hidden = true;
+      frame.src = 'about:blank';
+      showButton.hidden = false;
+      showButton.setAttribute('aria-expanded', 'false');
+      showButton.focus();
+    });
+    showButton.addEventListener('click', () => {
+      frame.src = videoUrl;
+      player.hidden = false;
+      showButton.hidden = true;
+      showButton.setAttribute('aria-expanded', 'true');
+      closeButton.focus();
+    });
+  </script>
 </body>
 </html>
